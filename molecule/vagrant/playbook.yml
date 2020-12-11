@@ -3,7 +3,7 @@
   hosts: all
   become: true
   roles:
-    - role: auditd
+    - role: ansible-role-auditd
   vars:
     auditd_enabled: true
     auditd_rules_templates:

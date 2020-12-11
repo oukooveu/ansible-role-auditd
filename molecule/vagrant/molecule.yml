@@ -18,10 +18,8 @@ provisioner:
     diff: true
   lint:
     name: ansible-lint
-  env:
-    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROOT}/roles
 scenario:
-  name: default-vagrant
+  name: vagrant
 verifier:
   name: goss
   lint:

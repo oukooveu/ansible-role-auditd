@@ -5,7 +5,7 @@ galaxy_info:
   author: oukooveu
   description: auditd daemon configuration
   license: Apache 2.0
-  min_ansible_version: 2.4
+  min_ansible_version: 2.8
   platforms:
     - name: EL
       versions:

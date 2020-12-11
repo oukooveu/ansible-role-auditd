@@ -9,8 +9,10 @@ vagrant=$(type -p vagrant)
 
 [ "x$VIRTUAL_ENV" != "x" ] && { echo "don't run from virtual env"; exit 1; }
 
+set -e
 python -m venv ${venv_path}
 . ${venv_path}/bin/activate
 pip install -r molecule/vagrant/requirements.txt >/dev/null
+set +e
 
 molecule ${command} -s vagrant
