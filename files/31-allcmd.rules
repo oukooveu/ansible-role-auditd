@@ -1,0 +1,2 @@
+-a always,exit -F arch=b64 -F auid>=1000 -F auid!=4294967295 -S execve -k allcmd
+-a always,exit -F arch=b32 -F auid>=1000 -F auid!=4294967295 -S execve -k allcmd

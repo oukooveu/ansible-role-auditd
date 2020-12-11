@@ -1,0 +1,4 @@
+{{ ansible_managed | comment }}
+{% for rule in auditd_local_rules %}
+{{ rule }}
+{% endfor %}

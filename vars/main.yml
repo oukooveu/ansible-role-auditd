@@ -1,0 +1,6 @@
+---
+auditd_conf_dir: /etc/audit/rules.d
+auditd_default_rules:
+  - 10-base-config.rules
+  - 40-local.rules
+  - 99-finalize.rules

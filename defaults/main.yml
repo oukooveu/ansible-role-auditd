@@ -1,0 +1,29 @@
+---
+auditd_enabled: false
+auditd_strict_rules_management: true # cleanup unknown rule files
+
+# auditd.conf
+auditd_max_log_file: 100 # size in mb
+auditd_num_logs: 10
+auditd_log_format: RAW # RAW, ENRICHED
+auditd_flush_freq: 100 # number of records
+auditd_dispatcher_qos: lossy # lossy or lossless
+auditd_space_left: 100 # mb
+auditd_space_left_action: syslog # ignore, syslog, rotate, email, exec, suspend, single, halt
+auditd_admin_space_left: 10
+auditd_admin_space_left_action: syslog
+
+# control rules
+auditd_enable_flag: 1 # 0=disabled, 1=enabled, 2=immutable
+auditd_kernel_buffers: 8192
+auditd_failure_mode: 1 # 0=silent, 1=printk, 2=panic
+auditd_rate_limit: 0 # messages/sec
+auditd_continue_on_errors: false
+auditd_ignore_errors: false
+auditd_loginuid_immutable: false
+
+# list of rules provided by the role
+auditd_rules_templates: []
+
+# raw rules for 40-local.rules
+auditd_local_rules: []

@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - role: auditd
+  vars:
+    auditd_enabled: true
+    auditd_rules_templates:
+      - 31-allcmd.rules

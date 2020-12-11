@@ -1,0 +1,16 @@
+#!/bin/bash
+venv_path=/tmp/molecule-venv
+
+command='test'
+[ $# -gt 0 ] && command=$1
+
+vagrant=$(type -p vagrant)
+[ "x$vagrant" == "x" ] && { echo "install vagrant first"; exit 1; }
+
+[ "x$VIRTUAL_ENV" != "x" ] && { echo "don't run from virtual env"; exit 1; }
+
+python -m venv ${venv_path}
+. ${venv_path}/bin/activate
+pip install -r molecule/vagrant/requirements.txt >/dev/null
+
+molecule ${command} -s vagrant

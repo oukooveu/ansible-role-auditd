@@ -1,0 +1,40 @@
+---
+- name: make sure rules will be loaded
+  lineinfile:
+    dest: /usr/lib/systemd/system/auditd.service
+    regexp: '^ExecStartPost='
+    line: "ExecStartPost=-/sbin/augenrules --load"
+    state: present
+
+- name: list rule files
+  when: auditd_strict_rules_management|bool
+  command: "ls {{ auditd_conf_dir }}"
+  failed_when: no
+  changed_when: no
+  check_mode: no
+  register: conf_dir_files
+
+- name: delete not managed files in configuration directory
+  when:
+    - auditd_strict_rules_management|bool
+    - item not in auditd_default_rules|union(auditd_rules_templates)
+  file:
+    name: "{{ auditd_conf_dir }}/{{ item }}"
+    state: absent
+  loop: "{{ conf_dir_files.stdout_lines }}"
+
+- name: configure default auditd rules
+  template:
+    src: "{{ item }}"
+    dest: "{{ auditd_conf_dir }}/{{ item }}"
+    mode: '0644'
+  loop: "{{ auditd_default_rules }}"
+  notify: restart auditd
+
+- name: configure provided auditd rules
+  copy:
+    src: "{{ item }}"
+    dest: "{{ auditd_conf_dir }}/{{ item }}"
+    mode: '0644'
+  loop: "{{ auditd_rules_templates }}"
+  notify: restart auditd

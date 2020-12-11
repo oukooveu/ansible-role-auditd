@@ -1,0 +1,27 @@
+---
+- name: ensure auditd package is present
+  package:
+    name: audit
+    state: present
+    update_cache: yes
+
+- name: configure /etc/audit/auditd.conf
+  template:
+    src: auditd.conf
+    dest: /etc/audit/auditd.conf
+  notify: restart auditd
+
+- name: configure auditd rules
+  include: auditd_rules.yaml
+
+- name: enable and start auditd
+  service:
+    name: auditd
+    state: started
+    enabled: yes
+
+- name: check if auditing present in grub config
+  replace:
+    path: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINUX=(?:(?![" ]audit=).)*)(?:[" ]audit=\S+)?(.*")$'
+    replace: '\1 audit=1\2'

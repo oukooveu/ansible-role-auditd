@@ -1,0 +1,8 @@
+---
+- name: enable and configure auditd
+  when: auditd_enabled|bool
+  include: auditd_enable.yaml
+
+- name: disable auditd
+  when: not auditd_enabled|bool
+  include: auditd_disable.yaml

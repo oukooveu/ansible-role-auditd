@@ -1,0 +1,29 @@
+{{ ansible_managed | comment }}
+## delete all rules
+-D
+
+## max number of outstanding audit buffers allowed (kernel default=64)
+-b {{ auditd_kernel_buffers }}
+
+## failure mode (how kernel handles auditd errors): 0=silent, 1=printk, 2=panic
+-f {{ auditd_failure_mode }}
+
+## rate limit in messages/sec (0=none)
+-r {{ auditd_rate_limit }}
+
+{% if auditd_continue_on_errors %}
+## continue loading rules in spite of an error (the normal action is to report
+## the line and issue with the rule and exit immediately with an error)
+-c
+{% endif %}
+
+{% if auditd_ignore_errors %}
+## continue loading rules when it runs across a an unsupported or a rule
+## with a syntax error but exit with success reason code
+-i
+{% endif %}
+
+{% if auditd_loginuid_immutable %}
+## make the loginuid immutable, this prevents tampering with the loginuid
+--loginuid-immutable
+{% endif %}

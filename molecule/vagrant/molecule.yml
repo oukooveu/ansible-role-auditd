@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+  enabled: false
+platforms:
+  - name: instance
+    box: centos/7
+provisioner:
+  name: ansible
+  options:
+    verbose: true
+    diff: true
+  lint:
+    name: ansible-lint
+  env:
+    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROOT}/roles
+scenario:
+  name: default-vagrant
+verifier:
+  name: goss
+  lint:
+    name: yamllint
+    options:
+      config-data:
+        line-length: disable

@@ -1,0 +1,3 @@
+{{ ansible_managed | comment }}
+## set enable flag: 0=disabled, 1=enabled, 2=immutable
+-e {{ auditd_enable_flag }}
