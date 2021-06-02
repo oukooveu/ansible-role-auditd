@@ -9,9 +9,9 @@
 - name: list rule files
   when: auditd_strict_rules_management|bool
   command: "ls {{ auditd_conf_dir }}"
-  failed_when: no
-  changed_when: no
-  check_mode: no
+  failed_when: false
+  changed_when: false
+  check_mode: false
   register: conf_dir_files
 
 - name: delete not managed files in configuration directory

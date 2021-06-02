@@ -3,7 +3,7 @@
   package:
     name: audit
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: configure /etc/audit/auditd.conf
   template:
@@ -18,7 +18,7 @@
   service:
     name: auditd
     state: started
-    enabled: yes
+    enabled: true
 
 - name: check if auditing present in grub config
   replace:

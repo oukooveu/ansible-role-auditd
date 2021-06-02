@@ -55,4 +55,3 @@ command:
     stdout:
       - 'enabled 1'
       - 'rate_limit 0'
-

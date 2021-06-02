@@ -5,13 +5,13 @@
   environment:
     PATH: '/usr/sbin:/usr/bin:/sbin:/bin'
   args:
-    warn: False
+    warn: false
 
 - name: disable auditd service
   service:
     name: auditd
     state: stopped
-    enabled: no
+    enabled: false
 
 - name: disable audit in grub config
   replace:
